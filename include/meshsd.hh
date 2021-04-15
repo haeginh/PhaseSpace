@@ -34,6 +34,7 @@
 
 #include "G4THitsMap.hh"
 #include "pshit.hh"
+#include "G4Box.hh"
 
 #include <vector>
 
@@ -55,6 +56,8 @@ class MeshSD : public G4VSensitiveDetector
     G4ParticleDefinition* e;
 
     PSHitsCollection* fHitsCollection;
+
+    G4Box shield;
 };
 
 #endif

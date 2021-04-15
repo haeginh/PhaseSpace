@@ -37,13 +37,16 @@
 #include "G4ParticleTable.hh"
 
 MeshSD::MeshSD(const G4String& name, const G4String& hcname)
- : G4VSensitiveDetector(name), fHitsCollection(0)
+ : G4VSensitiveDetector(name), fHitsCollection(0), shield("curtain", 32*cm, 40*cm, 0.25*cm)
 {
   collectionName.insert(hcname);
     gamma
     = G4ParticleTable::GetParticleTable()->FindParticle("gamma");
     e
     = G4ParticleTable::GetParticleTable()->FindParticle("e-");
+
+//    shield = G4Box("curtain", 32*cm, 40*cm, 0.25*cm);
+
 }
 
 MeshSD::~MeshSD()
@@ -66,6 +69,8 @@ G4bool MeshSD::ProcessHits(G4Step* step, G4TouchableHistory*)
 //      return false;
 //  }
   // energy deposit
+
+  if(shield.DistanceToIn(step->GetPreStepPoint()->GetPosition()-G4ThreeVector(15,55,89)*cm,step->GetTrack()->GetMomentumDirection())<1*m) return false;
   PSHit* newHit = new PSHit();
 
   newHit->SetParticleID(step->GetTrack()->GetParticleDefinition()->GetPDGEncoding());

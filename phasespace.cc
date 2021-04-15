@@ -44,10 +44,10 @@ int main ( int argc, char** argv)
         //runManager->Initialize();
         UImanager->ApplyCommand("/run/numberOfThreads 12");
         UImanager->ApplyCommand("/run/initialize");
-        UImanager->ApplyCommand("/beam/spec 80kVp.txt");
+        UImanager->ApplyCommand("/beam/spec 100kVp.txt");
         UImanager->ApplyCommand("/run/beamOn 1");
         G4Timer timer; timer.Start();
-        UImanager->ApplyCommand("/run/beamOn 1000000000");
+        UImanager->ApplyCommand("/run/beamOn 10000000");
         timer.Stop(); G4cout<<timer.GetRealElapsed()<<G4endl;
 
 //        UImanager->ApplyCommand("/control/execute "+G4String(argv[1]));
